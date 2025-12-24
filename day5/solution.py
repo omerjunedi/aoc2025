@@ -14,9 +14,9 @@ def merge(intervals: list[list[int]]) -> list[list[int]]:
     merged: list[list[int]] = []
     intervals.sort(key=lambda x: x[0])
 
-    prev = int_ranges[0]
+    prev = intervals[0]
 
-    for interval in int_ranges[1:]:
+    for interval in intervals[1:]:
 
         if interval[0] <= prev[1]:
             prev[1] = max(prev[1], interval[1])
