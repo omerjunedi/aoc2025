@@ -38,23 +38,30 @@ for _, p1, p2 in reversed(closest_points):
             for p in circuits[b]:
                 pointCircuitMap[p] = a
             circuits[b].clear()
+            if (len(circuits[a]) == len(points)):
+                print(p1[0]*p2[0])
+                break
 
     if p1 in pointCircuitMap and p2 not in pointCircuitMap:
         pointCircuitMap[p2] = pointCircuitMap[p1]
         circuits[pointCircuitMap[p1]].add(p2)
+        if len(circuits[pointCircuitMap[p1]]) == len(points):
+            print(p1[0]*p2[0])
+            break
+
 
     if p2 in pointCircuitMap and p1 not in pointCircuitMap:
         pointCircuitMap[p1] = pointCircuitMap[p2]
         circuits[pointCircuitMap[p2]].add(p1)
+        if len(circuits[pointCircuitMap[p2]]) == len(points):
+            print(p1[0]*p2[0])
+            break
 
     if p1 not in pointCircuitMap and p2 not in pointCircuitMap:
         circuits.append({p1, p2})
         pointCircuitMap[p1] = len(circuits) - 1
         pointCircuitMap[p2] = len(circuits) - 1
 
-    c += 1
-    if c == 1000:
-        break
 
 circuits.sort(key=len, reverse=True)
 print(len(circuits[0]) * len(circuits[1]) * len(circuits[2]))
